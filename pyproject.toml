@@ -6,3 +6,13 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = { file = "LICENSE.txt" }
 dependencies = []
+
+[build-system]
+requires = ["scikit-build-core>=0.4.3", "nanobind>=2.7.0"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+build-dir = "build/{wheel_tag}"
+wheel.py-api = "cp312"
+cmake.verbose = true
