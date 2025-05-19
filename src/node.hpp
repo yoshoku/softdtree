@@ -1,6 +1,9 @@
 #ifndef SOFTDTREE_NODE_HPP_
 #define SOFTDTREE_NODE_HPP_
 
+#include <cstdint>
+#include <vector>
+
 #include <Eigen/Dense>
 
 struct Node {
