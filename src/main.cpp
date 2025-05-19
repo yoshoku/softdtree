@@ -1,4 +1,4 @@
-#include "node.hpp"
+#include "soft_decision_tree.hpp"
 
 #include <nanobind/nanobind.h>
 #include <nanobind/eigen/dense.h>
@@ -40,5 +40,41 @@ NB_MODULE(_core, m) {
         [](Node& n, const nb::DRef<Eigen::VectorXd>& response) { n.response = response; })
     .def_prop_ro("feature_ids", [](Node& n) { return n.feature_ids; })
     .def_prop_ro("has_parent", &Node::has_parent)
+  ;
+  nb::class_<BaseSoftDecisionTree>(m, "BaseSoftDecisionTree")
+    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, double, bool, int32_t>(),
+         nb::arg("max_depth") = 8, nb::arg("max_features") = 1.0, nb::arg("max_epoch") = 50, nb::arg("batch_size") = 1,
+         nb::arg("eta") = 0.01, nb::arg("beta1") = 0.9, nb::arg("beta2") = 0.999, nb::arg("epsilon") = 1e-8,
+         nb::arg("dropout_rate") = 0.0, nb::arg("tol") = 1e-4,
+         nb::arg("verbose") = false,
+         nb::arg("random_seed") = -1)
+    .def("decision_function",
+        [](BaseSoftDecisionTree& t, const nb::DRef<Eigen::MatrixXd>& x) {
+          return t.decision_function(x);
+        })
+  ;
+  nb::class_<BaseSoftDecisionTreeClassifier, BaseSoftDecisionTree>(m, "BaseSoftDecisionTreeClassifier")
+    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, double, bool, int32_t>(),
+         nb::arg("max_depth") = 8, nb::arg("max_features") = 1.0, nb::arg("max_epoch") = 50, nb::arg("batch_size") = 1,
+         nb::arg("eta") = 0.01, nb::arg("beta1") = 0.9, nb::arg("beta2") = 0.999, nb::arg("epsilon") = 1e-8,
+         nb::arg("dropout_rate") = 0.0, nb::arg("tol") = 1e-4,
+         nb::arg("verbose") = false,
+         nb::arg("random_seed") = -1)
+    .def("fit",
+        [](BaseSoftDecisionTreeClassifier& t, const nb::DRef<Eigen::MatrixXd>& x, const nb::DRef<Eigen::MatrixXd>& y) {
+          t.fit(x, y);
+        })
+  ;
+  nb::class_<BaseSoftDecisionTreeRegressor, BaseSoftDecisionTree>(m, "BaseSoftDecisionTreeRegressor")
+    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, double, bool, int32_t>(),
+         nb::arg("max_depth") = 8, nb::arg("max_features") = 1.0, nb::arg("max_epoch") = 50, nb::arg("batch_size") = 1,
+         nb::arg("eta") = 0.01, nb::arg("beta1") = 0.9, nb::arg("beta2") = 0.999, nb::arg("epsilon") = 1e-8,
+         nb::arg("dropout_rate") = 0.0, nb::arg("tol") = 1e-4,
+         nb::arg("verbose") = false,
+         nb::arg("random_seed") = -1)
+    .def("fit",
+        [](BaseSoftDecisionTreeRegressor& t, const nb::DRef<Eigen::MatrixXd>& x, const nb::DRef<Eigen::MatrixXd>& y) {
+          t.fit(x, y);
+        })
   ;
 }
