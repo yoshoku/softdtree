@@ -4,7 +4,7 @@ import pytest
 from softdtree import Node
 
 
-def test_node():
+def test_node() -> None:
     node = Node()
     assert node is not None
     assert node.id == -1
