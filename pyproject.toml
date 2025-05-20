@@ -21,6 +21,7 @@ cmake.verbose = true
 dev = [
     "numpy>=2.2.6",
     "pytest>=8.3.5",
+    "ruff>=0.11.10",
     "scikit-learn>=1.6.1",
 ]
 
@@ -28,3 +29,13 @@ dev = [
 pythonpath = [
     "src"
 ]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+exclude = [".venv", "venv"]
+lint.select = ["ALL"]
+lint.ignore = ["D211", "D212"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/softdtree/test_*.py" = ["D", "INP001", "N803", "N806", "PLR2004", "S101"]
