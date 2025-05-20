@@ -19,11 +19,16 @@ cmake.verbose = true
 
 [dependency-groups]
 dev = [
+    "mypy>=1.15.0",
     "numpy>=2.2.6",
     "pytest>=8.3.5",
     "ruff>=0.11.10",
     "scikit-learn>=1.6.1",
 ]
+
+[[tool.mypy.overrides]]
+module = ["sklearn.*"]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 pythonpath = [
