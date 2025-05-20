@@ -1,10 +1,10 @@
-from softdtree import BaseSoftDecisionTreeRegressor
+import numpy as np
 from sklearn.base import BaseEstimator, MultiOutputMixin, RegressorMixin
 from sklearn.datasets import make_regression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, scale
 
-import numpy as np
+from softdtree import BaseSoftDecisionTreeRegressor
 
 
 class Regressor(BaseEstimator, MultiOutputMixin, RegressorMixin):
@@ -31,8 +31,8 @@ def test_soft_decision_tree_regressor():
     X, y = make_regression(n_samples=100, n_targets=1, n_features=2, bias=20.0, noise=2.0, random_state=42)
     y = scale(y)
     model = Pipeline([
-        ('scaler', StandardScaler()),
-        ('model', Regressor())
+        ("scaler", StandardScaler()),
+        ("model", Regressor()),
     ])
     model.fit(X, y)
     assert model.score(X, y) >= 0.95
@@ -41,8 +41,8 @@ def test_soft_decision_tree_multi_regressor():
     X, y = make_regression(n_samples=100, n_targets=2, n_features=2, bias=20.0, noise=2.0, random_state=42)
     y = scale(y)
     model = Pipeline([
-        ('scaler', StandardScaler()),
-        ('model', Regressor())
+        ("scaler", StandardScaler()),
+        ("model", Regressor()),
     ])
     model.fit(X, y)
     assert model.score(X, y) >= 0.95

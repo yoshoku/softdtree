@@ -3,5 +3,5 @@ from ._core import BaseSoftDecisionTreeClassifier, BaseSoftDecisionTreeRegressor
 __all__ = [
     "BaseSoftDecisionTreeClassifier",
     "BaseSoftDecisionTreeRegressor",
-    "Node"
+    "Node",
 ]

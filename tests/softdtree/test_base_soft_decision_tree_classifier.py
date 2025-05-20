@@ -1,11 +1,11 @@
-from softdtree import BaseSoftDecisionTreeClassifier
-from sklearn.base import BaseEstimator, MultiOutputMixin, ClassifierMixin
-from sklearn.utils.multiclass import unique_labels
-from sklearn.preprocessing import StandardScaler, label_binarize
-from sklearn.pipeline import Pipeline
-from sklearn.datasets import make_moons, load_digits
-
 import numpy as np
+from sklearn.base import BaseEstimator, ClassifierMixin, MultiOutputMixin
+from sklearn.datasets import load_digits, make_moons
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, label_binarize
+from sklearn.utils.multiclass import unique_labels
+
+from softdtree import BaseSoftDecisionTreeClassifier
 
 
 class Classifier(BaseEstimator, MultiOutputMixin, ClassifierMixin):
@@ -39,8 +39,8 @@ class Classifier(BaseEstimator, MultiOutputMixin, ClassifierMixin):
 def test_base_soft_decision_tree_classifier():
     X, y = make_moons(n_samples=100, noise=0.1, random_state=42)
     model = Pipeline([
-        ('scaler', StandardScaler()),
-        ('model', Classifier())
+        ("scaler", StandardScaler()),
+        ("model", Classifier()),
     ])
     model.fit(X, y)
     assert model.score(X, y) >= 0.95
@@ -48,8 +48,8 @@ def test_base_soft_decision_tree_classifier():
 def test_base_soft_decision_tree_multi_classifier():
     X, y = load_digits(n_class=3, return_X_y=True)
     model = Pipeline([
-        ('scaler', StandardScaler()),
-        ('model', Classifier())
+        ("scaler", StandardScaler()),
+        ("model", Classifier()),
     ])
     model.fit(X, y)
     assert model.score(X, y) >= 0.95

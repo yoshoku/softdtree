@@ -1,7 +1,8 @@
+import numpy as np
+import pytest
+
 from softdtree import Node
 
-import pytest
-import numpy as np
 
 def test_node():
     node = Node()
