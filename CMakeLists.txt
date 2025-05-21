@@ -8,15 +8,25 @@ find_package(Python 3.8
 
 find_package(nanobind CONFIG REQUIRED)
 
-nanobind_add_module(_core STABLE_ABI src/main.cpp)
-install(TARGETS _core DESTINATION ${SKBUILD_PROJECT_NAME})
+nanobind_add_module(_softdtree STABLE_ABI src/main.cpp)
+install(TARGETS _softdtree DESTINATION ${SKBUILD_PROJECT_NAME})
+install(FILES $<TARGET_FILE_DIR:_softdtree>/_softdtree.pyi $<TARGET_FILE_DIR:_softdtree>/py.typed DESTINATION ${SKBUILD_PROJECT_NAME})
+
+nanobind_add_stub(
+  _softdtree_stub
+  MODULE _softdtree
+  OUTPUT _softdtree.pyi
+  MARKER_FILE py.typed
+  PYTHON_PATH $<TARGET_FILE_DIR:_softdtree>
+  DEPENDS _softdtree
+)
 
 find_package(Eigen3 CONFIG REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 find_package(OpenMP)
 if(OpenMP_CXX_FOUND)
-  target_link_libraries(_core PRIVATE OpenMP::OpenMP_CXX)
+  target_link_libraries(_softdtree PRIVATE OpenMP::OpenMP_CXX)
 endif()
 
 include(CheckCXXCompilerFlag)

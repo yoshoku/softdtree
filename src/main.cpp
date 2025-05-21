@@ -5,7 +5,7 @@
 
 namespace nb = nanobind;
 
-NB_MODULE(_core, m) {
+NB_MODULE(_softdtree, m) {
   nb::class_<Node>(m, "Node")
     .def(nb::init<>())
     .def_prop_rw("id",

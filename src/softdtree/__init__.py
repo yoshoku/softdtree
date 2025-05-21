@@ -1,4 +1,4 @@
-from ._core import BaseSoftDecisionTreeClassifier, BaseSoftDecisionTreeRegressor, Node
+from ._softdtree import BaseSoftDecisionTreeClassifier, BaseSoftDecisionTreeRegressor, Node
 
 __all__ = [
     "BaseSoftDecisionTreeClassifier",
