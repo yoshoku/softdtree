@@ -51,7 +51,8 @@ NB_MODULE(_softdtree, m) {
     .def("decision_function",
         [](BaseSoftDecisionTree& t, const nb::DRef<Eigen::MatrixXd>& x) {
           return t.decision_function(x);
-        })
+        },
+        nb::sig("def decision_function(self, x: np.typing.NDArray[np.float64]) -> np.typing.NDArray[np.float64]"))
   ;
   nb::class_<BaseSoftDecisionTreeClassifier, BaseSoftDecisionTree>(m, "BaseSoftDecisionTreeClassifier")
     .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, double, bool, int32_t>(),
