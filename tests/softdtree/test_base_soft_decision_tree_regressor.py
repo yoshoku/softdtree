@@ -9,7 +9,7 @@ from softdtree._softdtree import BaseSoftDecisionTreeRegressor
 
 class Regressor(BaseEstimator, MultiOutputMixin, RegressorMixin):
     def __init__(self) -> None:
-        self.reg = BaseSoftDecisionTreeRegressor(max_depth=4, eta=0.1, random_seed=42)
+        self.reg = BaseSoftDecisionTreeRegressor(max_depth=8, eta=0.1, random_seed=42)
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> "Regressor":
         if y.ndim == 1:

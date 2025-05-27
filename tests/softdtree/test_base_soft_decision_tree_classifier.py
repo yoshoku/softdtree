@@ -11,7 +11,7 @@ from softdtree._softdtree import BaseSoftDecisionTreeClassifier
 class Classifier(BaseEstimator, MultiOutputMixin, ClassifierMixin):
     def __init__(self) -> None:
         self.clf = BaseSoftDecisionTreeClassifier(
-            max_depth=4, batch_size=10, eta=0.1, max_epoch=50, random_seed=42)
+            max_depth=8, batch_size=10, eta=0.1, max_epoch=50, random_seed=42)
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> "Classifier":
         self.classes_ = unique_labels(y)
