@@ -1,0 +1,25 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+      - dev*
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    name: pytest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: pyproject.toml
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+    - name: Install depedencies
+      run: uv sync --locked --all-extras --dev
+    - name: Run pytest
+      run: uv run pytest -s
