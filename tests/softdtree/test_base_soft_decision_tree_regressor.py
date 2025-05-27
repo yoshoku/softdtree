@@ -4,7 +4,7 @@ from sklearn.datasets import make_regression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, scale
 
-from softdtree import BaseSoftDecisionTreeRegressor
+from softdtree._softdtree import BaseSoftDecisionTreeRegressor
 
 
 class Regressor(BaseEstimator, MultiOutputMixin, RegressorMixin):
@@ -23,9 +23,6 @@ class Regressor(BaseEstimator, MultiOutputMixin, RegressorMixin):
         if y.shape[1] == 1:
             y = y[:, 0]
         return y
-
-    def size(self) -> int:
-        return self.reg.size()
 
 def test_soft_decision_tree_regressor() -> None:
     X, y = make_regression(n_samples=100, n_targets=1, n_features=2, bias=20.0, noise=2.0, random_state=42)

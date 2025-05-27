@@ -5,7 +5,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, label_binarize
 from sklearn.utils.multiclass import unique_labels
 
-from softdtree import BaseSoftDecisionTreeClassifier
+from softdtree._softdtree import BaseSoftDecisionTreeClassifier
 
 
 class Classifier(BaseEstimator, MultiOutputMixin, ClassifierMixin):

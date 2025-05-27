@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from softdtree import Node
+from softdtree._softdtree import Node
 
 
 def test_node() -> None:
