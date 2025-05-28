@@ -30,7 +30,7 @@ public:
     const uint32_t max_depth = 8, const double max_features = 1.0, const uint32_t max_epoch = 50, const uint32_t batch_size = 1,
     const double eta = 0.01, const double beta1 = 0.9, const double beta2 = 0.999, const double epsilon = 1e-8,
     const double dropout_rate = 0.0, const double tol = 1e-4,
-    const bool verbose = false,
+    const int32_t verbose = 0,
     const int32_t random_seed = -1
   ): max_depth_(max_depth), max_features_(max_features), max_epoch_(max_epoch), batch_size_(batch_size),
     eta_(eta), beta1_(beta1), beta2_(beta2), epsilon_(epsilon),
@@ -70,7 +70,7 @@ protected:
   const double epsilon_;
   const double dropout_rate_;
   const double tol_;
-  const bool verbose_;
+  const int32_t verbose_;
   const uint32_t random_seed_;
   uint32_t n_outputs_;
   uint32_t n_components_;
@@ -162,7 +162,7 @@ protected:
 
     // calculate error on splited node.
     const double new_error = error_(x, y, tmp_nodes);
-    if (verbose_) {
+    if (verbose_ > 0) {
       if (node->has_parent()) {
         std::cout << (node->is_left ? "left  " : "right ");
       } else {
@@ -305,7 +305,7 @@ public:
     const uint32_t max_depth = 8, const double max_features = 1.0, const uint32_t max_epoch = 50, const uint32_t batch_size = 1,
     const double eta = 0.01, const double beta1 = 0.9, const double beta2 = 0.999, const double epsilon = 1e-8,
     const double dropout_rate = 0.0, const double tol = 1e-4,
-    const bool verbose = false,
+    const int32_t verbose = 0,
     const int32_t random_seed = -1
   ): BaseSoftDecisionTree(max_depth, max_features, max_epoch, batch_size,
     eta, beta1, beta2, epsilon, dropout_rate, tol, verbose, random_seed) {}
@@ -334,7 +334,7 @@ public:
     const uint32_t max_depth = 8, const double max_features = 1.0, const uint32_t max_epoch = 50, const uint32_t batch_size = 1,
     const double eta = 0.01, const double beta1 = 0.9, const double beta2 = 0.999, const double epsilon = 1e-8,
     const double dropout_rate = 0.0, const double tol = 1e-4,
-    const bool verbose = false,
+    const int32_t verbose = 0,
     const int32_t random_seed = -1
   ): BaseSoftDecisionTree(max_depth, max_features, max_epoch, batch_size,
     eta, beta1, beta2, epsilon, dropout_rate, tol, verbose, random_seed) {}
