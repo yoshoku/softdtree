@@ -35,7 +35,7 @@ class SoftDecisionTreeClassifier(BaseEstimator, MultiOutputMixin, ClassifierMixi
     verbose: int
     random_seed: int
     classes_: np.ndarray
-    _tree: BaseSoftDecisionTreeClassifier
+    tree_: BaseSoftDecisionTreeClassifier
 
     def __init__(self, max_depth: int = 8, max_features: float = 1.0,
                  max_epoch: int = 100, batch_size: int = 5,
@@ -55,7 +55,7 @@ class SoftDecisionTreeClassifier(BaseEstimator, MultiOutputMixin, ClassifierMixi
         self.tol = tol
         self.verbose = verbose
         self.random_seed = random_seed
-        self._tree = BaseSoftDecisionTreeClassifier(
+        self.tree_ = BaseSoftDecisionTreeClassifier(
             max_depth, max_features, max_epoch, batch_size,
             eta,beta1, beta2, epsilon, dropout_rate, tol, verbose, random_seed)
 
@@ -67,14 +67,14 @@ class SoftDecisionTreeClassifier(BaseEstimator, MultiOutputMixin, ClassifierMixi
             y = self._one_hot_encode(y)
         if y.ndim == 1:
             y = np.expand_dims(y, axis=1).astype(np.float64)
-        self._tree.fit(X, y)
+        self.tree_.fit(X, y)
         return self
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """Predict class labels for the input data X."""
         check_is_fitted(self)
         X = check_array(X)
-        df_values = self._tree.decision_function(X)
+        df_values = self.tree_.decision_function(X)
         n_samples = X.shape[0]
         if df_values.shape[1] > 1:
             result = np.array(
@@ -89,7 +89,7 @@ class SoftDecisionTreeClassifier(BaseEstimator, MultiOutputMixin, ClassifierMixi
     def decision_function(self, X: np.ndarray) -> np.typing.NDArray[np.float64]:
         """Compute the decision function for the input data X."""
         X = X[:, self.random_ids] if hasattr(self, "random_ids") else X
-        return self._tree.decision_function(X)
+        return self.tree_.decision_function(X)
 
     def _one_hot_encode(self, y: np.ndarray) -> np.typing.NDArray[np.float64]:
         return label_binarize(y, classes=self.classes_).astype(np.float64)
@@ -115,7 +115,7 @@ class SoftDecisionTreeRegressor(BaseEstimator, MultiOutputMixin, RegressorMixin)
     tol: float
     verbose: int
     random_seed: int
-    _tree: BaseSoftDecisionTreeRegressor
+    tree_: BaseSoftDecisionTreeRegressor
 
     def __init__(self, max_depth: int = 8, max_features: float = 1.0,
                  max_epoch: int = 100, batch_size: int = 5,
@@ -135,7 +135,7 @@ class SoftDecisionTreeRegressor(BaseEstimator, MultiOutputMixin, RegressorMixin)
         self.tol = tol
         self.verbose = verbose
         self.random_seed = random_seed
-        self._tree = BaseSoftDecisionTreeRegressor(
+        self.tree_ = BaseSoftDecisionTreeRegressor(
             max_depth, max_features, max_epoch, batch_size,
             eta, beta1, beta2, epsilon, dropout_rate, tol, verbose, random_seed)
 
@@ -144,7 +144,7 @@ class SoftDecisionTreeRegressor(BaseEstimator, MultiOutputMixin, RegressorMixin)
         X, y = check_X_y(X, y, multi_output=True)
         if y.ndim == 1:
             y = np.expand_dims(y, axis=1)
-        self._tree.fit(X, y)
+        self.tree_.fit(X, y)
         self.is_fitted_ = True
         return self
 
@@ -152,7 +152,7 @@ class SoftDecisionTreeRegressor(BaseEstimator, MultiOutputMixin, RegressorMixin)
         """Predict target values for the input data X."""
         X = check_array(X)
         X = X[:, self.random_ids] if hasattr(self, "random_ids") else X
-        df_values = self._tree.decision_function(X)
+        df_values = self.tree_.decision_function(X)
         if df_values.ndim > 1 and df_values.shape[1] == 1:
             return df_values[:,0]
         return df_values
