@@ -26,6 +26,49 @@ $ pip install -U softdtree
 
 ## Usage
 
+The API of softdtree is compatible with [scikit-learn](https://scikit-learn.org/stable/).
+
+### Classifier
+
+```python
+from sklearn.datasets import load_digits
+from sklearn.model_selection import cross_val_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from softdtree import SoftDecisionTreeClassifier
+
+X, y = load_digits(n_class=4, return_X_y=True)
+
+clf = Pipeline([
+    ("scaler", StandardScaler()),
+    ("tree", SoftDecisionTreeClassifier(
+        max_depth=4, eta=0.01, max_epoch=100, random_seed=42)),                                                                           ])
+
+scores = cross_val_score(clf, X, y, cv=5)
+print(f"Accuracy: {scores.mean():.3f} ± {scores.std():.3f}")
+```
+
+### Regressor
+
+```python
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import cross_val_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler
+from softdtree import SoftDecisionTreeRegressor
+
+X, y = load_diabetes(return_X_y=True)
+
+reg = Pipeline([
+    ("scaler", MinMaxScaler()),
+    ("tree", SoftDecisionTreeRegressor(
+        max_depth=4, eta=0.1, max_epoch=100, random_seed=42)),
+])
+
+scores = cross_val_score(reg, X, y, cv=5)
+print(f"R^2: {scores.mean():.3f} ± {scores.std():.3f}")
+```
+
 ## Properties
 
 ## References
