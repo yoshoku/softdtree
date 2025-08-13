@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "BSD-3-Clause"
 license-filex = ["LICENSE.txt"]
+authors = [
+    { name = "Atsushi Tatsuma", email = "yoshoku@outlook.com" }
+]
 dependencies = []
 
 [build-system]
