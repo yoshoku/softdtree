@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "Soft Decision Tree"
 readme = "README.md"
 requires-python = ">=3.12"
-license = { file = "LICENSE.txt" }
+license = "BSD-3-Clause"
+license-filex = ["LICENSE.txt"]
 dependencies = []
 
 [build-system]
