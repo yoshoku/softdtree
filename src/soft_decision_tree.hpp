@@ -29,12 +29,12 @@ public:
   BaseSoftDecisionTree(
     const uint32_t max_depth = 8, const double max_features = 1.0, const uint32_t max_epoch = 50, const uint32_t batch_size = 1,
     const double eta = 0.01, const double beta1 = 0.9, const double beta2 = 0.999, const double epsilon = 1e-8,
-    const double dropout_rate = 0.0, const double tol = 1e-4,
+    const double tol = 1e-4,
     const int32_t verbose = 0,
     const int32_t random_seed = -1
   ): max_depth_(max_depth), max_features_(max_features), max_epoch_(max_epoch), batch_size_(batch_size),
     eta_(eta), beta1_(beta1), beta2_(beta2), epsilon_(epsilon),
-    dropout_rate_(dropout_rate), tol_(tol),
+    tol_(tol),
     verbose_(verbose),
     random_seed_([random_seed]() { std::random_device seedg; return (random_seed < 0 ? seedg() : random_seed); }()),
     n_outputs_(0) {}
@@ -68,7 +68,6 @@ protected:
   const double beta1_;
   const double beta2_;
   const double epsilon_;
-  const double dropout_rate_;
   const double tol_;
   const int32_t verbose_;
   const uint32_t random_seed_;
@@ -116,9 +115,6 @@ protected:
 
     // early stop
     if (node->depth > max_depth_) return candidate;
-    // dropout
-    std::bernoulli_distribution dist_dout(dropout_rate_);
-    if (node->has_parent() && dropout_rate_ > 0.0 && dist_dout(rng_)) return candidate;
 
     // initialization
     const double base_error = error_(x, y, nodes_);
@@ -304,11 +300,11 @@ public:
   BaseSoftDecisionTreeClassifier(
     const uint32_t max_depth = 8, const double max_features = 1.0, const uint32_t max_epoch = 50, const uint32_t batch_size = 1,
     const double eta = 0.01, const double beta1 = 0.9, const double beta2 = 0.999, const double epsilon = 1e-8,
-    const double dropout_rate = 0.0, const double tol = 1e-4,
+    const double tol = 1e-4,
     const int32_t verbose = 0,
     const int32_t random_seed = -1
   ): BaseSoftDecisionTree(max_depth, max_features, max_epoch, batch_size,
-    eta, beta1, beta2, epsilon, dropout_rate, tol, verbose, random_seed) {}
+    eta, beta1, beta2, epsilon, tol, verbose, random_seed) {}
 
 protected:
   Eigen::VectorXd evaluate_(const Eigen::VectorXd& x, const std::vector<std::shared_ptr<Node>>& nodes, const std::vector<double>& gating_values) override {
@@ -333,11 +329,11 @@ public:
   BaseSoftDecisionTreeRegressor(
     const uint32_t max_depth = 8, const double max_features = 1.0, const uint32_t max_epoch = 50, const uint32_t batch_size = 1,
     const double eta = 0.01, const double beta1 = 0.9, const double beta2 = 0.999, const double epsilon = 1e-8,
-    const double dropout_rate = 0.0, const double tol = 1e-4,
+    const double tol = 1e-4,
     const int32_t verbose = 0,
     const int32_t random_seed = -1
   ): BaseSoftDecisionTree(max_depth, max_features, max_epoch, batch_size,
-    eta, beta1, beta2, epsilon, dropout_rate, tol, verbose, random_seed) {}
+    eta, beta1, beta2, epsilon, tol, verbose, random_seed) {}
 
 protected:
   Eigen::VectorXd evaluate_(const Eigen::VectorXd& x, const std::vector<std::shared_ptr<Node>>& nodes, const std::vector<double>& gating_values) override {

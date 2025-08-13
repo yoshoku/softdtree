@@ -42,10 +42,10 @@ NB_MODULE(_softdtree, m) {
     .def_prop_ro("has_parent", &Node::has_parent)
   ;
   nb::class_<BaseSoftDecisionTree>(m, "BaseSoftDecisionTree")
-    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, double, int32_t, int32_t>(),
+    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, int32_t, int32_t>(),
          nb::arg("max_depth") = 8, nb::arg("max_features") = 1.0, nb::arg("max_epoch") = 50, nb::arg("batch_size") = 1,
          nb::arg("eta") = 0.01, nb::arg("beta1") = 0.9, nb::arg("beta2") = 0.999, nb::arg("epsilon") = 1e-8,
-         nb::arg("dropout_rate") = 0.0, nb::arg("tol") = 1e-4,
+         nb::arg("tol") = 1e-4,
          nb::arg("verbose") = 0,
          nb::arg("random_seed") = -1)
     .def("decision_function",
@@ -55,10 +55,10 @@ NB_MODULE(_softdtree, m) {
         nb::sig("def decision_function(self, x: np.typing.NDArray[np.float64]) -> np.typing.NDArray[np.float64]"))
   ;
   nb::class_<BaseSoftDecisionTreeClassifier, BaseSoftDecisionTree>(m, "BaseSoftDecisionTreeClassifier")
-    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, double, int32_t, int32_t>(),
+    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, int32_t, int32_t>(),
          nb::arg("max_depth") = 8, nb::arg("max_features") = 1.0, nb::arg("max_epoch") = 50, nb::arg("batch_size") = 1,
          nb::arg("eta") = 0.01, nb::arg("beta1") = 0.9, nb::arg("beta2") = 0.999, nb::arg("epsilon") = 1e-8,
-         nb::arg("dropout_rate") = 0.0, nb::arg("tol") = 1e-4,
+         nb::arg("tol") = 1e-4,
          nb::arg("verbose") = 0,
          nb::arg("random_seed") = -1)
     .def("fit",
@@ -67,10 +67,10 @@ NB_MODULE(_softdtree, m) {
         })
   ;
   nb::class_<BaseSoftDecisionTreeRegressor, BaseSoftDecisionTree>(m, "BaseSoftDecisionTreeRegressor")
-    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, double, int32_t, int32_t>(),
+    .def(nb::init<uint32_t, double, uint32_t, uint32_t, double, double, double, double, double, int32_t, int32_t>(),
          nb::arg("max_depth") = 8, nb::arg("max_features") = 1.0, nb::arg("max_epoch") = 50, nb::arg("batch_size") = 1,
          nb::arg("eta") = 0.01, nb::arg("beta1") = 0.9, nb::arg("beta2") = 0.999, nb::arg("epsilon") = 1e-8,
-         nb::arg("dropout_rate") = 0.0, nb::arg("tol") = 1e-4,
+         nb::arg("tol") = 1e-4,
          nb::arg("verbose") = 0,
          nb::arg("random_seed") = -1)
     .def("fit",

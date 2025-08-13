@@ -86,7 +86,6 @@ print(f"R^2: {scores.mean():.3f} ± {scores.std():.3f}")
 ## References
 
 - O. Irsoy, O. T. Yildiz, and E. Alpaydin, "Soft Decision Trees," In Proc. ICPR2012, 2012.
-- O. Irsoy and E. Alpaydin, "Dropout regularization in hierarchical mixture of experts," Neurocomputing, vol. 419, pp. 148-156, 2021.
 
 ## License
 

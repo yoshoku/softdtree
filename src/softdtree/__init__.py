@@ -30,7 +30,6 @@ class SoftDecisionTreeClassifier(BaseEstimator, MultiOutputMixin, ClassifierMixi
     beta1: float
     beta2: float
     epsilon: float
-    dropout_rate: float
     tol: float
     verbose: int
     random_seed: int
@@ -40,7 +39,7 @@ class SoftDecisionTreeClassifier(BaseEstimator, MultiOutputMixin, ClassifierMixi
     def __init__(self, max_depth: int = 8, max_features: float = 1.0,
                  max_epoch: int = 100, batch_size: int = 5,
                  eta: float = 0.1, beta1: float = 0.9, beta2: float = 0.999,
-                 epsilon: float = 1e-8, dropout_rate: float = 0.0,
+                 epsilon: float = 1e-8,
                  tol: float = 1e-4, verbose: int = 0, random_seed: int = -1) -> None:
         """Initialize the SoftDecisionTreeClassifier."""
         self.max_depth = max_depth
@@ -51,13 +50,12 @@ class SoftDecisionTreeClassifier(BaseEstimator, MultiOutputMixin, ClassifierMixi
         self.beta1 = beta1
         self.beta2 = beta2
         self.epsilon = epsilon
-        self.dropout_rate = dropout_rate
         self.tol = tol
         self.verbose = verbose
         self.random_seed = random_seed
         self.tree_ = BaseSoftDecisionTreeClassifier(
             max_depth, max_features, max_epoch, batch_size,
-            eta,beta1, beta2, epsilon, dropout_rate, tol, verbose, random_seed)
+            eta,beta1, beta2, epsilon, tol, verbose, random_seed)
 
     def fit(self, X: np.ndarray, y: np.ndarray, **params: dict) -> "SoftDecisionTreeClassifier":
         """Fit the SoftDecisionTreeClassifier to the training data."""
@@ -111,7 +109,6 @@ class SoftDecisionTreeRegressor(BaseEstimator, MultiOutputMixin, RegressorMixin)
     beta1: float
     beta2: float
     epsilon: float
-    dropout_rate: float
     tol: float
     verbose: int
     random_seed: int
@@ -120,7 +117,7 @@ class SoftDecisionTreeRegressor(BaseEstimator, MultiOutputMixin, RegressorMixin)
     def __init__(self, max_depth: int = 8, max_features: float = 1.0,
                  max_epoch: int = 100, batch_size: int = 5,
                  eta: float = 0.1, beta1: float = 0.9, beta2: float = 0.999,
-                 epsilon: float = 1e-8, dropout_rate: float = 0.0,
+                 epsilon: float = 1e-8,
                  tol: float = 1e-4, verbose: int = 0, random_seed: int = -1) -> None:
         """Initialize the SoftDecisionTreeRegressor."""
         self.max_depth = max_depth
@@ -131,13 +128,12 @@ class SoftDecisionTreeRegressor(BaseEstimator, MultiOutputMixin, RegressorMixin)
         self.beta1 = beta1
         self.beta2 = beta2
         self.epsilon = epsilon
-        self.dropout_rate = dropout_rate
         self.tol = tol
         self.verbose = verbose
         self.random_seed = random_seed
         self.tree_ = BaseSoftDecisionTreeRegressor(
             max_depth, max_features, max_epoch, batch_size,
-            eta, beta1, beta2, epsilon, dropout_rate, tol, verbose, random_seed)
+            eta, beta1, beta2, epsilon, tol, verbose, random_seed)
 
     def fit(self, X: np.ndarray, y: np.ndarray, **params: dict) -> "SoftDecisionTreeRegressor":
         """Fit the SoftDecisionTreeRegressor to the training data."""
