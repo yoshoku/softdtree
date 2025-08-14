@@ -42,7 +42,8 @@ X, y = load_digits(n_class=4, return_X_y=True)
 clf = Pipeline([
     ("scaler", StandardScaler()),
     ("tree", SoftDecisionTreeClassifier(
-        max_depth=4, eta=0.01, max_epoch=100, random_seed=42)),                                                                           ])
+        max_depth=4, eta=0.01, max_epoch=100, random_seed=42))
+])
 
 scores = cross_val_score(clf, X, y, cv=5)
 print(f"Accuracy: {scores.mean():.3f} ± {scores.std():.3f}")
@@ -62,7 +63,7 @@ X, y = load_diabetes(return_X_y=True)
 reg = Pipeline([
     ("scaler", MinMaxScaler()),
     ("tree", SoftDecisionTreeRegressor(
-        max_depth=4, eta=0.1, max_epoch=100, random_seed=42)),
+        max_depth=4, eta=0.1, max_epoch=100, random_seed=42))
 ])
 
 scores = cross_val_score(reg, X, y, cv=5)
