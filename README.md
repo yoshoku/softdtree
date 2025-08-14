@@ -1,5 +1,9 @@
 # softdtree
 
+[![Test Status](https://github.com/yoshoku/softdtree/actions/workflows/test.yml/badge.svg)](https://github.com/yoshoku/softdtree/actions/workflows/test.yml)
+[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/softdtree/blob/main/LICENSE.txt)
+[![PyPI](https://img.shields.io/pypi/v/softdtree)](https://pypi.org/project/softdtree/)
+
 softdtree is a Python library that implements classifier and regressor with Soft Decision Tree.
 
 ## Installation
