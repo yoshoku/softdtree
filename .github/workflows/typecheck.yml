@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     name: mypy
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Install Eigen3
       run: sudo apt-get install -y libeigen3-dev
     - name: Setup Python
