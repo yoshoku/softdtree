@@ -3,7 +3,6 @@ from sklearn.base import BaseEstimator, MultiOutputMixin, RegressorMixin
 from sklearn.datasets import make_regression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, scale
-
 from softdtree._softdtree import BaseSoftDecisionTreeRegressor
 
 

@@ -1,6 +1,5 @@
 import numpy as np
 import pytest
-
 from softdtree._softdtree import Node
 
 
