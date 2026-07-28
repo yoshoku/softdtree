@@ -36,7 +36,7 @@ class SoftDecisionTreeClassifier(BaseEstimator, MultiOutputMixin, ClassifierMixi
     classes_: np.ndarray
     tree_: BaseSoftDecisionTreeClassifier
 
-    def __init__(self, max_depth: int = 8, max_features: float = 1.0,
+    def __init__(self, max_depth: int = 8, max_features: float = 1.0, # noqa: PLR0917
                  max_epoch: int = 100, batch_size: int = 5,
                  eta: float = 0.1, beta1: float = 0.9, beta2: float = 0.999,
                  epsilon: float = 1e-8,
@@ -114,7 +114,7 @@ class SoftDecisionTreeRegressor(BaseEstimator, MultiOutputMixin, RegressorMixin)
     random_seed: int
     tree_: BaseSoftDecisionTreeRegressor
 
-    def __init__(self, max_depth: int = 8, max_features: float = 1.0,
+    def __init__(self, max_depth: int = 8, max_features: float = 1.0, # noqa: PLR0917
                  max_epoch: int = 100, batch_size: int = 5,
                  eta: float = 0.1, beta1: float = 0.9, beta2: float = 0.999,
                  epsilon: float = 1e-8,
